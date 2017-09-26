@@ -22,7 +22,12 @@ namespace ImageToASCIIConverter
                 using (Bitmap sourceImage = new Bitmap(Image.FromFile(args[0])))
                 {
                     int resize = Math.Max(sourceImage.Width, sourceImage.Height) / _maxSize;
-                    Bitmap resizedImage = ResizeImage(sourceImage, sourceImage.Width / resize, sourceImage.Height / resize);
+                    Bitmap resizedImage;
+
+                    if (resize != 0)
+                        resizedImage = ResizeImage(sourceImage, sourceImage.Width / resize, sourceImage.Height / resize);
+                    else
+                        resizedImage = sourceImage;
 
                     using (resizedImage)
                     {
